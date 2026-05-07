@@ -30,11 +30,12 @@ export default function ArchiveList({ ideas, selectedId, onSelect }: Props) {
       {[...ideas].reverse().map((idea) => (
         <button
           key={idea.id}
+          type="button"
           onClick={() => onSelect(idea.id)}
-          className={`w-full text-left rounded-xl p-3 transition-all ${
+          className={`w-full text-left rounded-xl p-3 transition-all cursor-pointer ${
             selectedId === idea.id
               ? "bg-purple-50 ring-2 ring-purple-300"
-              : "bg-white hover:bg-gray-50"
+              : "bg-white hover:bg-purple-50 active:bg-purple-100"
           } shadow-sm`}
         >
           <div className="flex items-start justify-between gap-2 mb-1">
@@ -59,6 +60,9 @@ export default function ArchiveList({ ideas, selectedId, onSelect }: Props) {
                 {tag}
               </span>
             ))}
+          </div>
+          <div className="text-right mt-1">
+            <span className="text-xs text-gray-300">詳細を見る →</span>
           </div>
         </button>
       ))}

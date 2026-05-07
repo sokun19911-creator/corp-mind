@@ -149,7 +149,7 @@ export default function Home() {
     }
   };
 
-  const handleCollect = async () => {
+  const handleCollect = async (keyword?: string) => {
     if (collecting) return;
     setCollecting(true);
     try {
@@ -158,7 +158,7 @@ export default function Home() {
         "AI活用ビジネスの成功事例",
         "スタートアップの資金調達動向",
       ];
-      const topic = topics[Math.floor(Math.random() * topics.length)];
+      const topic = keyword || topics[Math.floor(Math.random() * topics.length)];
       const result = await callClaudeSearch(
         COLLECTOR_PROMPT,
         `${topic}について最新情報を収集してください。`
