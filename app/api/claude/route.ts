@@ -12,7 +12,8 @@ export async function POST(req: NextRequest) {
     messages: [{ role: "user", content }],
   });
   const text = msg.content.find((b) => b.type === "text")?.text ?? "{}";
+  console.log("[claude-route] raw response:", text.slice(0, 500));
   const match = text.match(/\{[\s\S]*\}/);
-  if (!match) return NextResponse.json({ error: "JSON not found" }, { status: 400 });
+  if (!match) return NextResponse.json({ error: "JSON not found", raw: text.slice(0, 300) }, { status: 400 });
   return NextResponse.json(JSON.parse(match[0]));
 }
